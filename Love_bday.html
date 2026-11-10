@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Love! ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            300: '#f472b6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                        },
+                        cream: '#FFFBF7',
+                    },
+                    fontFamily: {
+                        cursive: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFFBF7;
+            overflow-x: hidden;
+        }
+
+        /* Floating Hearts Background Animation */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: rgba(244, 63, 94, 0.4);
+            animation: floatUp 6s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.8) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Envelope / Card Modal Animations */
+        .card-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scroll reveal class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen relative flex flex-col items-center justify-between selection:bg-rose-100 selection:text-rose-600">
+
+    <!-- Audio Element na Paulit-ulit (Looping) -->
+    <audio id="birthday-audio" src="https://cdn.imageurlgenerator.com/uploads/db168225-38f9-48d5-b8c4-89d734e77c48.mp3" preload="auto" loop></audio>
+
+    <!-- Background Floating Hearts -->
+    <div id="hearts-container"></div>
+
+    <!-- 1. POP-UP MODAL (CARD COVER) -->
+    <div id="card-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity duration-500">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border-4 border-rose-200 card-bounce relative overflow-hidden">
+            <!-- Decorative Badge -->
+            <div class="absolute -top-10 -left-10 w-24 h-24 bg-rose-100 rounded-full blur-lg opacity-70"></div>
+            <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-pink-100 rounded-full blur-lg opacity-70"></div>
+            
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">HAPPY BIRTHDAY! ✨</h2>
+                <p class="text-gray-500 text-sm mb-6">❤️❤️❤️</p>
+                
+                <button onclick="openCard()" class="w-full bg-gradient-to-r from-rose-400 to-rose-600 hover:from-rose-500 hover:to-rose-700 text-white font-semibold py-3.5 px-6 rounded-2xl shadow-lg shadow-rose-200 active:scale-95 transition duration-200 flex items-center justify-center gap-2">
+                    <span>Click Here!</span>
+                    <i class="fa-solid fa-heart animate-pulse"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT (AFTER OPENING CARD) -->
+    <div id="main-content" class="w-full max-w-md mx-auto px-4 py-8 hidden z-10 flex-col items-center">
+
+        <!-- 2. HERO SECTION (MAIN PICTURE & GREETING) -->
+        <header class="text-center mt-6 mb-12 w-full">
+            <div class="relative inline-block mb-6">
+                <!-- Outer decorative ring -->
+                <div class="absolute -inset-2 bg-gradient-to-r from-pink-300 via-rose-400 to-red-400 rounded-full blur-md opacity-75 animate-pulse"></div>
+    
+                <!-- Main Girlfriend Photo -->
+                <img src="https://cdn.corenexis.com/f/b77jo5ZJ.jpg"
+                alt="My Love" 
+                class="relative w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-full border-4 border-white shadow-xl mx-auto">
+            </div>
+
+            <h1 class="font-cursive text-4xl sm:text-5xl text-rose-600 mb-2 font-bold tracking-wide">
+                Happy Birthday, Love! 🎉
+            </h1>
+            <p class="text-gray-600 text-sm sm:text-base italic px-4">
+                "I may not be beside you to celebrate your special day, but I hope magustuhan mo ang gift ko. I want you to know that I am always proud of you and everything you do. I know life hasn't been easy lately, especially being away from home and the people you love, but I hope you never forget how strong and amazing you are.
+
+Wishing you good health, genuine happiness, more blessings, and success in everything you do. I hope that even in the simplest ways, you find reasons to smile and enjoy your special day. Always remember that you are never alone. Even though we're miles apart, I will always be here to support you, understand you, and remind you how much you mean to me.
+
+Stay strong lang, Mahal. Don't be too hard on yourself, and don't forget to take care of yourself. I hope someday, we won't have to celebrate special occasions through screens and messages anymore because I'll finally be there beside you, celebrating every little moment together.
+
+I may not be able to give you a hug and kiss today, but I'm sending you all my love from here. I miss you so much, and I can't wait for the day na magkasama na ulit tayo.
+
+Enjoy your day, Mahal. You deserve all the happiness in the world. I love you always, and I will always be proud of you. ❤️❤️❤️"
+            </p>
+        </header>
+
+        <!-- Scroll Indicator -->
+        <div class="text-center text-rose-400 animate-bounce mb-12">
+            <p class="text-xs font-semibold mb-1 uppercase tracking-widest">Scroll down</p>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <!-- 3. PHOTO MEMORIES FEED (SCROLL DOWN) -->
+        <section class="w-full space-y-8 mb-16">
+            <h2 class="text-center font-cursive text-3xl text-rose-500 mb-6 font-semibold">
+                Our Sweet Moments 📸
+            </h2>
+
+            <!-- Card 1 -->
+            <div class="reveal bg-white p-4 rounded-3xl shadow-md border border-rose-100 flex flex-col items-center">
+                <div class="w-full overflow-hidden rounded-2xl mb-3 bg-rose-50/50">
+                    <img src="https://cdn.corenexis.com/f/HGF2XdRM.jpg"
+                         alt="Memory 1" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <p class="text-center text-gray-700 text-sm font-medium">
+                    "I" ❤️
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="reveal bg-white p-4 rounded-3xl shadow-md border border-rose-100 flex flex-col items-center">
+                <div class="w-full h-64 overflow-hidden rounded-2xl mb-3">
+                    <img src="https://cdn.corenexis.com/f/53pLzAbG.jpg" 
+                         alt="Memory 2" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <p class="text-center text-gray-700 text-sm font-medium">
+                    "Love" ✨
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="reveal bg-white p-4 rounded-3xl shadow-md border border-rose-100 flex flex-col items-center">
+                <div class="w-full overflow-hidden rounded-2xl mb-3 bg-rose-50/50">
+                    <img src="https://cdn.corenexis.com/f/WYIow1mU.jpg" 
+                         alt="Memory 3" 
+                         class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+                <p class="text-center text-gray-700 text-sm font-medium">
+                    "You" 🌹
+                </p>
+            </div>
+        </section>
+
+        <!-- Sweet Footer Message -->
+        <footer class="reveal text-center bg-rose-50 border border-rose-200 p-6 rounded-3xl w-full shadow-inner mb-8">
+            <h3 class="font-cursive text-3xl text-rose-600 mb-2">Forever & Always</h3>
+            <p class="text-gray-600 text-sm">
+                Enjoy your special day, Mahal ko! Happy Birthday! 🎂🥂
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Create background floating hearts
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // 2. Open Birthday Card Modal Function & Play Audio
+        function openCard() {
+            const modal = document.getElementById('card-modal');
+            const mainContent = document.getElementById('main-content');
+            const audio = document.getElementById('birthday-audio');
+            
+            // Play audio when button is clicked
+            if (audio) {
+                audio.play().catch(error => {
+                    console.log('Audio playback failed:', error);
+                });
+            }
+
+            // Fade out modal
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                mainContent.classList.add('flex');
+                
+                // Trigger Confetti Celebration Blast
+                triggerConfetti();
+            }, 500);
+        }
+
+        // 3. Confetti Effect
+        function triggerConfetti() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#f43f5e', '#f472b6', '#ffffff']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#f43f5e', '#f472b6', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+
+        // 4. Scroll Animations (Fade-in on scroll)
+        window.addEventListener('scroll', revealElements);
+
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
